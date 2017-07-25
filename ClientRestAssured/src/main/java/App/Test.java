@@ -1,5 +1,7 @@
 package App;
 
+import java.io.File;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -18,12 +20,17 @@ public class Test {
         addHotel2();
         addHotel3();
         findHotelByName();
+
+        findHotelJsonByName();
+
+        addHotelJson();
+
     }
 
     void addCity1(){
         given().
                 contentType("application/json").
-                body("{\"name\":\"Lyon\", \"country\":\"France\"}").
+                body(new File("data/city1.json")).
         when().
                 post("/addCity").
         then().
@@ -36,7 +43,7 @@ public class Test {
     void addCity2(){
         given().
                 contentType("application/json").
-                body("{\"name\":\"Utrecht\", \"country\":\"Netherlands\"}").
+                body(new File("data/city2.json")).
         when().
                 post("/addCity").
         then().
@@ -48,7 +55,7 @@ public class Test {
     void addCity3(){
         given().
                 contentType("application/json").
-                body("{\"name\":\"Gent\", \"country\":\"Belgium\"}").
+                body(new File("data/city3.json")).
         when().
                 post("/addCity").
         then().
@@ -79,7 +86,7 @@ public class Test {
     void addHotel1(){
         given().
                 contentType("application/json").
-                body("{\"cityName\":\"Lyon\", \"name\":\"La Course\", \"street\":\"Rue Laroche\", \"postcode\":\"1234\"}").
+                body(new File("data/hotel1.json")).
         when().
                 post("/addHotel").
         then().
@@ -89,7 +96,7 @@ public class Test {
     void addHotel2(){
         given().
                 contentType("application/json").
-                body("{\"cityName\":\"Utrecht\", \"name\":\"Hotel Balneario\", \"street\":\"Av del Cid\", \"postcode\":\"2356\"}").
+                body(new File("data/hotel2.json")).
         when().
                 post("/addHotel").
         then().
@@ -99,7 +106,7 @@ public class Test {
     void addHotel3(){
         given().
                 contentType("application/json").
-                body("{\"cityName\":\"Lyon\", \"name\":\"Gravensteen\", \"street\":\"Damstraat\", \"postcode\":\"5544\"}").
+                body(new File("data/hotel3.json")).
         when().
                 post("/addHotel").
         then().
@@ -117,6 +124,29 @@ public class Test {
                 body("name", equalTo("La Course")).
                 body("street", equalTo("Rue Laroche")).
                 body("postcode", equalTo("1234"));
+    }
+
+    void findHotelJsonByName(){
+        given().
+                param("name", "La Course").
+        when().
+                post("/findHotelJsonByName").
+        then().
+                statusCode(200);
+                //body("name", equalTo("Lyon")).
+                //body("country", equalTo("France"));
+
+    }
+
+    void addHotelJson(){
+        given().
+                contentType("application/json").
+                //body("{\"cityName\":\"Lyon\", \"name\":\"Gravensteen\", \"street\":\"Damstraat\", \"postcode\":\"5544\"}").
+                body(new File("data/hoteljson2_1.json")).
+        when().
+                post("/addHotel2").
+        then().
+                statusCode(200);
     }
 
 }

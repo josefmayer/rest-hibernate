@@ -54,4 +54,17 @@ public class Controller {
         return hotelJson;
     }
 
+
+    //*********
+    @RequestMapping(value = "/findHotelJsonByName", method = RequestMethod.POST, produces="application/json")
+    public HotelCityJson findHotelJsonByName(@RequestParam(value="name") String name){
+        HotelCityJson hotelCityJson = cityHotelService.findHotelByName2(name);
+        return hotelCityJson;
+    }
+
+    @RequestMapping(value = "/addHotel2", method = RequestMethod.POST, consumes="application/json", produces="application/json")
+    public void addHotel2(@RequestBody HotelCityJson hotelCityJson){
+        cityHotelService.insertHotel(hotelCityJson);
+    }
+
 }

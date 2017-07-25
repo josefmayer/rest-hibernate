@@ -14,7 +14,7 @@ Testing: Rest-assured  <br />
 
 ### Data Model Rest
 Data types for JSON-serialization: <br />
-CityJson, HotelJson <br />
+CityJson, HotelJson, HotelCityJson <br />
 
 
 ### Data Model JPA

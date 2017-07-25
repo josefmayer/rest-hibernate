@@ -2,6 +2,7 @@ package cityHotel;
 
 import appRest.CityJson;
 import appRest.HotelJson;
+import appRest.HotelCityJson;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
@@ -36,6 +37,15 @@ public class CityHotelService {
         dao.persistHotel(hotel);
     }
 
+    public void insertHotel(HotelCityJson hcj){
+        Hotel hotel = new Hotel();
+        City city1 = findCityByName(hcj.getCityJson().getName());
+
+        hotel.setCity(city1).setName(hcj.getName()).setStreet(hcj.getStreet()).setPostcode(hcj.getPostcode());
+        dao.persistHotel(hotel);
+    }
+
+
     public City findCityByName(String name){
         List<City> resultList = dao.findCityByName(name);
         City touristCity = resultList.get(0);
@@ -63,5 +73,18 @@ public class CityHotelService {
         HotelJson hotelJson = new HotelJson(h.getCity().getName(), h.getName(), h.getStreet(), h.getPostcode());
         return hotelJson;
     }
+
+
+    public HotelCityJson findHotelByName2(String name){
+        List<Hotel> resultList = dao.findHotelByName(name);
+        Hotel h = resultList.get(0);
+
+        CityJson cityJson = new CityJson(h.getCity().getName(), h.getCity().getCountry());
+        HotelCityJson hotelCityJson = new HotelCityJson(cityJson,  h.getName(), h.getStreet(), h.getPostcode());
+
+        return hotelCityJson;
+    }
+
+
 
 }
