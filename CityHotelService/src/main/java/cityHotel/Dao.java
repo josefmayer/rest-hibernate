@@ -12,8 +12,10 @@ import java.util.List;
 public class Dao {
 
     public Dao(){
-        this.emf = Persistence.createEntityManagerFactory("jpa-example-mysql");
+        //this.emf = Persistence.createEntityManagerFactory("jpa-example-mysql");
         //this.emf = Persistence.createEntityManagerFactory("jpa-example-mssqlserver");
+        this.emf = Persistence.createEntityManagerFactory("jpa-example-postgres");
+        //this.emf = Persistence.createEntityManagerFactory("jpa-example-hsqldb");
     }
 
     private EntityManagerFactory emf;

@@ -8,7 +8,7 @@ Implementation of a persistence layer with Hibernate<br />
 Application: SpringBoot <br />
 Rest: SpringRest, JSON <br />
 ORM: JPA, Hibernate, Association, JPQL <br />
-Databases: MySQL, MSSQL <br />
+Databases: MySQL, MSSQL, Postgres, HSQLDB  <br />
 Testing: Rest-assured  <br />
 
 
@@ -43,6 +43,13 @@ Use persistence unit 'jpa-example-mssqlserver'  <br />
 Start MSSQLSERVER <br />
 Create table 'jpa_example' <br />
 
+##### Postgres
+Use persistence unit 'jpa-example-postgres'  <br />
+Start Postgres <br />
+Create table 'jpa_example' <br />
+
+##### HSQLDB
+Use persistence unit 'jpa-example-hsqldb'  <br />
 
 
 ##### Run Rest Service
